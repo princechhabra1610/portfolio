@@ -216,7 +216,7 @@ export default function Contact() {
               </motion.a>
 
               <motion.a
-                href="mailto:princechhabra1610@gmail.com"
+                href="mailto:prince.chhabra.dev@gmail.com"
                 className="border-2 border-white/20 px-8 py-4 rounded-xl font-medium backdrop-blur-sm hover:bg-white/10 hover:border-pink-500/50 transition-all flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}

@@ -1,39 +1,3 @@
-// export default function Experience() {
-//   return (
-//     <section id="experience" className="py-24 px-6">
-//       <div className="max-w-4xl mx-auto">
-
-//         <h2 className="text-4xl font-bold mb-16">
-//           Professional Experience
-//         </h2>
-
-//         <div className="space-y-10 border-l border-white/20 pl-8">
-
-//           <div>
-//             <h3 className="text-xl font-semibold">
-//               Full Stack Developer – Happiest Minds [April 2024 - Present]
-//             </h3>
-//             <p className="text-gray-400">
-//               Developing scalable backend services using Spring Boot and optimizing MySQL queries.
-//             </p>
-//           </div>
-
-//           <div>
-//             <h3 className="text-xl font-semibold">
-//               Intern – HighRadius Corporation [Oct 2023 - March 2024]
-//             </h3>
-//             <p className="text-gray-400">
-//               Built full-stack web product from scratch with interactive UI components.
-//             </p>
-//           </div>
-
-//         </div>
-
-//       </div>
-//     </section>
-//   );
-// }
-
 import { motion } from "framer-motion";
 
 export default function Experience() {

@@ -6,6 +6,7 @@ export default function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   // Track scroll progress
   useEffect(() => {
@@ -15,33 +16,46 @@ export default function Navbar() {
       const progress = (scrollTop / docHeight) * 100;
       setScrollProgress(progress);
 
-      // Determine active section
-      const sections = ['hero', 'expertise', 'certifications', 'projects', 'experience', 'contact'];
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom > 100;
+      // Only update active section from scroll if not currently navigating via click
+      if (!isNavigating) {
+        // Determine active section
+        const sections = ['hero', 'expertise', 'certifications', 'projects', 'experience', 'contact'];
+        const currentSection = sections.find(section => {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            return rect.top <= 100 && rect.bottom > 100;
+          }
+          return false;
+        });
+        
+        if (currentSection) {
+          setActiveSection(currentSection);
         }
-        return false;
-      });
-      
-      if (currentSection) {
-        setActiveSection(currentSection);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isNavigating]);
 
   const navItems = [
     { href: "#hero", label: "Home" },
     { href: "#expertise", label: "Skills" },
+    { href: "#certifications", label: "Certifications"},
     { href: "#projects", label: "Projects" },
     { href: "#experience", label: "Experience" },
     { href: "#contact", label: "Contact" }
   ];
+
+  const handleNavClick = (sectionId) => {
+    setActiveSection(sectionId);
+    setIsNavigating(true);
+    // Clear the navigation flag after smooth scroll completes
+    setTimeout(() => {
+      setIsNavigating(false);
+    }, 800);
+  };
 
   return (
     <>
@@ -75,6 +89,7 @@ export default function Navbar() {
               <motion.a
                 key={item.href}
                 href={item.href}
+                onClick={() => handleNavClick(item.href.slice(1))}
                 className={`relative hover:text-white transition-colors ${
                   activeSection === item.href.slice(1) ? 'text-blue-400' : ''
                 }`}
@@ -86,7 +101,12 @@ export default function Navbar() {
                   <motion.div
                     className="absolute -bottom-1 left-0 right-0 h-[2px] bg-blue-400 rounded-full"
                     layoutId="activeSection"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 400, 
+                      damping: 30,
+                      duration: 0.6
+                    }}
                   />
                 )}
               </motion.a>
@@ -176,7 +196,10 @@ export default function Navbar() {
                         ? 'text-blue-400 bg-blue-500/10' 
                         : 'text-gray-300'
                     }`}
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => {
+                      handleNavClick(item.href.slice(1));
+                      setMobileMenuOpen(false);
+                    }}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}

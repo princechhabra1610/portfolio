@@ -14,7 +14,9 @@ export default function LoadingAnimation() {
           setTimeout(() => setIsLoading(false), 500);
           return 100;
         }
-        return prev + Math.random() * 15;
+        // Ensure progress never exceeds 100%
+        const increment = Math.random() * 15;
+        return Math.min(prev + increment, 100);
       });
     }, 200);
 

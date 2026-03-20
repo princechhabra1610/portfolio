@@ -13,7 +13,7 @@ export default function Experience() {
     {
       title: "Intern",
       company: "HighRadius Corporation",
-      period: "Oct 2023 – March 2024",
+      period: "Jan 2022 – Apr 2022",
       description: "Built a full-stack web product from scratch, designed intuitive UI components, and translated business requirements into scalable software solutions.",
       skills: ["Full Stack", "UI Design", "JavaScript", "React"],
       current: false
